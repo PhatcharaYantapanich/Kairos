@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Kairos</title>
+  <meta name="description" content="ปฏิทินและงานของคุณในที่เดียว — ซิงค์ iPhone, iPad และ Mac" />
+  <meta name="theme-color" content="#F6F5F1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Kairos" />
+  <meta name="format-detection" content="telephone=no" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
+  <link rel="icon" type="image/svg+xml" href="icon.svg" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="app.css?v=202610040906" />
+  <script>
+    // apply theme before first paint (no white flash in dark mode)
+    (function () {
+      try {
+        var s = JSON.parse(localStorage.getItem('kairos.theme') || '{}');
+        var dark = s.theme === 'dark' || ((!s.theme || s.theme === 'auto') && matchMedia('(prefers-color-scheme: dark)').matches);
+        if (dark) { document.documentElement.classList.add('dark'); document.documentElement.dataset.theme = 'dark'; }
+        if (s.accent) document.documentElement.dataset.accent = s.accent;
+      } catch (e) {}
+    })();
+    window.KAIROS_VERSION = '202610040906';
+  </script>
+  <script src="config.js?v=202610040906"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <noscript>Kairos ต้องเปิด JavaScript</noscript>
+  <script>
+    // If the app has not started after 8 s, explain what is wrong instead of a blank page.
+    setTimeout(function () {
+      if (window.__kairosBooted) return;
+      var r = document.getElementById('root');
+      if (!r || r.childElementCount) return;
+      r.innerHTML = '<div style="max-width:440px;margin:18vh auto;padding:24px;font:15px/1.6 -apple-system,system-ui,sans-serif;color:#111B2C">' +
+        '<b style="font-size:18px">เปิด Kairos ไม่สำเร็จ</b><br>ไฟล์บางไฟล์อาจอัปโหลดไม่ครบ ให้ตรวจว่าใน repository มีไฟล์ต่อไปนี้อยู่ระดับเดียวกับ index.html:<br>' +
+        '<code>app.js, app.css, config.js, sw.js</code> และไฟล์ <code>*.js</code> อื่นทุกไฟล์จากโฟลเดอร์ kairos-app<br><br>' +
+        '<button onclick="location.reload(true)" style="font:inherit;padding:8px 16px;border-radius:10px;border:0;background:#111B2C;color:#fff">ลองโหลดใหม่</button></div>';
+    }, 8000);
+  </script>
+  <script type="module" src="app.js?v=202610040906"></script>
+</body>
+</html>
