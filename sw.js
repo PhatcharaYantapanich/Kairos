@@ -1,8 +1,8 @@
 // Kairos service worker — offline app shell + notification clicks.
-const VERSION = '202610051011';
+const VERSION = '202610051031';
 const SHELL = `kairos-shell-${VERSION}`;
 const RUNTIME = 'kairos-runtime';
-const ASSETS = ['./', 'index.html', `app.js?v=${VERSION}`, `app.css?v=${VERSION}`, `config.js?v=${VERSION}`, 'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'apple-touch-icon.png', 'badge-96.png', 'icon.svg', 'chunk-IMRAELIV.js', 'chunk-MLB4FKXH.js', 'chunk-PVPQDRIX.js', 'chunk-WOT6VMZA.js', 'cloud-3YNNKEKW.js', 'date-KLM3VYKG.js', 'state-JKBTXQL7.js', 'store-ZX5YSGUS.js'];
+const ASSETS = ['./', 'index.html', `app.js?v=${VERSION}`, `app.css?v=${VERSION}`, `config.js?v=${VERSION}`, 'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'apple-touch-icon.png', 'badge-96.png', 'icon.svg', 'chunk-A3DG2Y5S.js', 'chunk-NJYR3K7L.js', 'chunk-WOT6VMZA.js', 'chunk-XULGOWRQ.js', 'cloud-3YNNKEKW.js', 'date-BQIDZKWN.js', 'state-3Y6SPMAQ.js', 'store-O5ALSNEA.js'];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(SHELL).then((c) => c.addAll(ASSETS)).catch(() => {}));
