@@ -17,8 +17,8 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap" />
-  <link rel="stylesheet" href="app.css?v=202610051031" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="app.css?v=202610051743" />
   <script>
     // apply theme before first paint (no white flash in dark mode)
     (function () {
@@ -29,11 +29,43 @@
         if (s.accent) document.documentElement.dataset.accent = s.accent;
       } catch (e) {}
     })();
-    window.KAIROS_VERSION = '202610051031';
+    window.KAIROS_VERSION = '202610051743';
   </script>
-  <script src="config.js?v=202610051031"></script>
+  <link rel="modulepreload" href="chunk-DN2KA74K.js" />
+  <link rel="modulepreload" href="chunk-EL62TQZ5.js" />
+  <link rel="modulepreload" href="chunk-UCAEQB2A.js" />
+  <link rel="modulepreload" href="chunk-VI6NNQR2.js" />
+  <link rel="modulepreload" href="chunk-WOT6VMZA.js" />
+  <link rel="modulepreload" href="chunk-ZZCOH46R.js" />
+  <link rel="modulepreload" href="cloud-A3Z5Y5V6.js" />
+  <link rel="modulepreload" href="cloudctl-P4KVG6UL.js" />
+  <link rel="modulepreload" href="date-MAJRIMOM.js" />
+  <link rel="modulepreload" href="egg-BVHPPTKC.js" />
+  <link rel="modulepreload" href="state-MDF2GOHK.js" />
+  <link rel="modulepreload" href="store-VMO5CFQL.js" />
+  <script src="config.js?v=202610051743"></script>
+  <style>
+    /* splash: painted before any script runs */
+    #splash { position: fixed; inset: 0; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 30px; background: #F6F5F1; transition: opacity .55s cubic-bezier(.22,1,.36,1), transform .55s cubic-bezier(.22,1,.36,1); }
+    html.dark #splash { background: #0A0F18; }
+    #splash.out { opacity: 0; transform: scale(1.04); pointer-events: none; }
+    #splash .sp-logo { width: 84px; height: 84px; border-radius: 20px; box-shadow: 0 18px 40px -16px rgba(17,27,44,.45); animation: spIn .7s cubic-bezier(.34,1.36,.64,1) both, spBreath 2.4s ease-in-out .7s infinite; }
+    #splash .sp-name { margin-top: -14px; font: 700 15px/1 Cinzel, "Times New Roman", serif; letter-spacing: .32em; color: #86683A; opacity: 0; animation: spFade .6s ease .25s forwards; }
+    html.dark #splash .sp-name { color: #DDBE85; }
+    #splash .sp-load { width: 26px; height: 26px; border-radius: 50%; border: 2.2px solid rgba(168,132,76,.18); border-top-color: #A8844C; animation: spSpin .85s linear infinite, spFade .4s ease .35s both; }
+    @keyframes spIn { from { opacity: 0; transform: scale(.82); } to { opacity: 1; transform: none; } }
+    @keyframes spBreath { 50% { transform: scale(1.035); } }
+    @keyframes spFade { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes spSpin { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) { #splash .sp-logo { animation: none; } }
+  </style>
 </head>
 <body>
+  <div id="splash" aria-label="กำลังเปิด Kairos" role="status">
+    <svg class="sp-logo" viewBox="0 0 512 512" aria-hidden="true"><defs><linearGradient id="spg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1A2B48"/><stop offset="1" stop-color="#0F1A2E"/></linearGradient></defs><rect width="512" height="512" rx="112" fill="url(#spg)"/><circle cx="256" cy="256" r="138" fill="none" stroke="#C9A86A" stroke-width="18"/><path d="M256 146v30" stroke="#C9A86A" stroke-width="18" stroke-linecap="round"/><path d="M200 260l40 40 76-80" fill="none" stroke="#E2C48C" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <div class="sp-name">KAIROS</div>
+    <div class="sp-load"></div>
+  </div>
   <div id="root"></div>
   <noscript>Kairos ต้องเปิด JavaScript</noscript>
   <script>
@@ -42,12 +74,13 @@
       if (window.__kairosBooted) return;
       var r = document.getElementById('root');
       if (!r || r.childElementCount) return;
+      var sp = document.getElementById('splash'); if (sp) sp.remove();
       r.innerHTML = '<div style="max-width:440px;margin:18vh auto;padding:24px;font:15px/1.6 -apple-system,system-ui,sans-serif;color:#111B2C">' +
         '<b style="font-size:18px">เปิด Kairos ไม่สำเร็จ</b><br>ไฟล์บางไฟล์อาจอัปโหลดไม่ครบ ให้ตรวจว่าใน repository มีไฟล์ต่อไปนี้อยู่ระดับเดียวกับ index.html:<br>' +
         '<code>app.js, app.css, config.js, sw.js</code> และไฟล์ <code>*.js</code> อื่นทุกไฟล์จากโฟลเดอร์ kairos-app<br><br>' +
         '<button onclick="location.reload(true)" style="font:inherit;padding:8px 16px;border-radius:10px;border:0;background:#111B2C;color:#fff">ลองโหลดใหม่</button></div>';
     }, 8000);
   </script>
-  <script type="module" src="app.js?v=202610051031"></script>
+  <script type="module" src="app.js?v=202610051743"></script>
 </body>
 </html>
