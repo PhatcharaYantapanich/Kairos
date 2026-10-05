@@ -17,6 +17,5 @@ window.KAIROS_CONFIG = {
   },
 
   // Google Cloud console › Google Auth Platform › Clients › Web application › Client ID
-  // (step 3 in README — fill in later to connect Google Calendar)
-  googleClientId: '',
+  googleClientId: '891716718196-uom1lqm3ht41k455u0nm99lrkdjc2bm5.apps.googleusercontent.com',
 };
