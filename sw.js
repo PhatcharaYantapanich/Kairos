@@ -1,5 +1,5 @@
 // Kairos service worker — offline app shell + notification clicks.
-const VERSION = '202610060201';
+const VERSION = '202610060211';
 const SHELL = `kairos-shell-${VERSION}`;
 const RUNTIME = 'kairos-runtime';
 const ASSETS = ['./', 'index.html', `app.js?v=${VERSION}`, `app.css?v=${VERSION}`, `config.js?v=${VERSION}`, 'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'apple-touch-icon.png', 'badge-96.png', 'icon.svg', 'ProjectPM-R4S7WSUB.js', 'chunk-3JPLASRB.js', 'chunk-AIFBZR4E.js', 'chunk-ECSC66G4.js', 'chunk-JUZMOXVU.js', 'chunk-MBGRORSB.js', 'chunk-MO6CMK4P.js', 'chunk-OSTCLTRP.js', 'chunk-PTWZNRIV.js', 'chunk-QJUMC5XX.js', 'chunk-SKY6VUSE.js', 'chunk-V27DXLTQ.js', 'chunk-WOT6VMZA.js', 'chunk-WTXIYJYG.js', 'clock-O47IX7DJ.js', 'cloud-KDRJCKAH.js', 'cloudctl-64A7PGII.js', 'date-V2OUMP57.js', 'egg-BAO55PKA.js', 'index.esm-B43YSHPE.js', 'index.esm-RTEO4NVN.js', 'index.esm-SKEIU7C5.js', 'state-RDCPYOCR.js', 'store-HZBDY7FD.js'];
