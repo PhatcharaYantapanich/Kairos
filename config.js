@@ -18,4 +18,9 @@ window.KAIROS_CONFIG = {
 
   // Google Cloud console › Google Auth Platform › Clients › Web application › Client ID
   googleClientId: '891716718196-uom1lqm3ht41k455u0nm99lrkdjc2bm5.apps.googleusercontent.com',
+
+  // Firebase › App Check › Kairos › Fraud Defense — the key ID created in Google Cloud
+  // (public, not a secret). Needed when App Check is enforced for AI Logic (Gemini).
+  // Leave '' to turn off.
+  appCheckSiteKey: '',
 };
