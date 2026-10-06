@@ -1,8 +1,8 @@
 // Kairos service worker — offline app shell + notification clicks.
-const VERSION = '202610060211';
+const VERSION = '202610060426';
 const SHELL = `kairos-shell-${VERSION}`;
 const RUNTIME = 'kairos-runtime';
-const ASSETS = ['./', 'index.html', `app.js?v=${VERSION}`, `app.css?v=${VERSION}`, `config.js?v=${VERSION}`, 'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'apple-touch-icon.png', 'badge-96.png', 'icon.svg', 'ProjectPM-R4S7WSUB.js', 'chunk-3JPLASRB.js', 'chunk-AIFBZR4E.js', 'chunk-ECSC66G4.js', 'chunk-JUZMOXVU.js', 'chunk-MBGRORSB.js', 'chunk-MO6CMK4P.js', 'chunk-OSTCLTRP.js', 'chunk-PTWZNRIV.js', 'chunk-QJUMC5XX.js', 'chunk-SKY6VUSE.js', 'chunk-V27DXLTQ.js', 'chunk-WOT6VMZA.js', 'chunk-WTXIYJYG.js', 'clock-O47IX7DJ.js', 'cloud-KDRJCKAH.js', 'cloudctl-64A7PGII.js', 'date-V2OUMP57.js', 'egg-BAO55PKA.js', 'index.esm-B43YSHPE.js', 'index.esm-RTEO4NVN.js', 'index.esm-SKEIU7C5.js', 'state-RDCPYOCR.js', 'store-HZBDY7FD.js'];
+const ASSETS = ['./', 'index.html', `app.js?v=${VERSION}`, `app.css?v=${VERSION}`, `config.js?v=${VERSION}`, 'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'apple-touch-icon.png', 'badge-96.png', 'icon.svg', 'ProjectPM-V53STHHM.js', 'chunk-2OWDNT2W.js', 'chunk-3JPLASRB.js', 'chunk-445TVN6N.js', 'chunk-B53A22VJ.js', 'chunk-C7SAKPNH.js', 'chunk-ECSC66G4.js', 'chunk-JUZMOXVU.js', 'chunk-LN6AFU6X.js', 'chunk-MO6CMK4P.js', 'chunk-QJUMC5XX.js', 'chunk-TQKZULSS.js', 'chunk-WOT6VMZA.js', 'chunk-WTXIYJYG.js', 'clock-TLKDDFYV.js', 'cloud-KDRJCKAH.js', 'cloudctl-BF7RZG4Y.js', 'date-M3XQ35Z3.js', 'egg-BAO55PKA.js', 'index.esm-B43YSHPE.js', 'index.esm-RTEO4NVN.js', 'index.esm-SKEIU7C5.js', 'state-C43O6LVN.js', 'store-PG7XP3RX.js'];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(SHELL).then((c) => c.addAll(ASSETS)).catch(() => {}));
