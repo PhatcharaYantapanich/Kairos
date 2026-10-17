@@ -1,8 +1,8 @@
 // Kairos service worker — offline app shell + notification clicks.
-const VERSION = '202610060426';
+const VERSION = '202610170834';
 const SHELL = `kairos-shell-${VERSION}`;
 const RUNTIME = 'kairos-runtime';
-const ASSETS = ['./', 'index.html', `app.js?v=${VERSION}`, `app.css?v=${VERSION}`, `config.js?v=${VERSION}`, 'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'apple-touch-icon.png', 'badge-96.png', 'icon.svg', 'ProjectPM-V53STHHM.js', 'chunk-2OWDNT2W.js', 'chunk-3JPLASRB.js', 'chunk-445TVN6N.js', 'chunk-B53A22VJ.js', 'chunk-C7SAKPNH.js', 'chunk-ECSC66G4.js', 'chunk-JUZMOXVU.js', 'chunk-LN6AFU6X.js', 'chunk-MO6CMK4P.js', 'chunk-QJUMC5XX.js', 'chunk-TQKZULSS.js', 'chunk-WOT6VMZA.js', 'chunk-WTXIYJYG.js', 'clock-TLKDDFYV.js', 'cloud-KDRJCKAH.js', 'cloudctl-BF7RZG4Y.js', 'date-M3XQ35Z3.js', 'egg-BAO55PKA.js', 'index.esm-B43YSHPE.js', 'index.esm-RTEO4NVN.js', 'index.esm-SKEIU7C5.js', 'state-C43O6LVN.js', 'store-PG7XP3RX.js'];
+const ASSETS = ['./', 'index.html', `app.js?v=${VERSION}`, `app.css?v=${VERSION}`, `config.js?v=${VERSION}`, 'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'apple-touch-icon.png', 'badge-96.png', 'icon.svg', 'ProjectPM-ILFG4YCB.js', 'chunk-2YXNFRTK.js', 'chunk-3JPLASRB.js', 'chunk-AI3KYXKG.js', 'chunk-ECSC66G4.js', 'chunk-ESHLL7OZ.js', 'chunk-JUZMOXVU.js', 'chunk-MO6CMK4P.js', 'chunk-QJUMC5XX.js', 'chunk-RAEZGK24.js', 'chunk-SIZPUZ64.js', 'chunk-U5HUKN4D.js', 'chunk-WOT6VMZA.js', 'chunk-WTXIYJYG.js', 'clock-XOREMUCU.js', 'cloud-KDRJCKAH.js', 'cloudctl-LCM67MM6.js', 'date-73Q7USAE.js', 'egg-BAO55PKA.js', 'index.esm-B43YSHPE.js', 'index.esm-RTEO4NVN.js', 'index.esm-SKEIU7C5.js', 'state-JXTWQKSK.js', 'store-NQLS2NS3.js'];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(SHELL).then((c) => c.addAll(ASSETS)).catch(() => {}));
@@ -50,18 +50,31 @@ self.addEventListener('fetch', (e) => {
 
 self.addEventListener('notificationclick', (e) => {
   e.notification.close();
-  const taskId = e.notification.data?.taskId;
+  const d = e.notification.data || {};
+  const taskId = d.taskId;
+  const url = d.url || (taskId ? `./?task=${taskId}` : './');
   e.waitUntil((async () => {
     const all = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
     const client = all[0];
-    if (client) { await client.focus(); if (taskId) client.postMessage({ type: 'open-task', taskId }); return; }
-    await self.clients.openWindow(taskId ? `./?task=${taskId}` : './');
+    if (client) {
+      await client.focus();
+      client.postMessage(taskId ? { type: 'open-task', taskId } : { type: 'open-url', url });
+      return;
+    }
+    await self.clients.openWindow(url);
   })());
 });
 
-// Ready for server push (Firebase Cloud Messaging) if added later.
+// Lock-screen / Notification Center alerts sent by the Kairos Worker (Web Push).
+// The message is in the Declarative Web Push shape, so Safari can show it even
+// without this handler; here we add the icon, badge count and tap target.
 self.addEventListener('push', (e) => {
   let d = {};
   try { d = e.data?.json() || {}; } catch { d = { title: e.data?.text() }; }
-  e.waitUntil(self.registration.showNotification(d.title || 'Kairos', { body: d.body || '', data: d.data || {}, icon: 'icon-192.png', badge: 'badge-96.png', tag: d.tag }));
+  const n = d.notification || d;
+  const data = { ...(n.data || {}), url: n.navigate || n.url || './' };
+  e.waitUntil((async () => {
+    if (n.app_badge != null && self.navigator.setAppBadge) { try { +n.app_badge ? await self.navigator.setAppBadge(+n.app_badge) : await self.navigator.clearAppBadge(); } catch {} }
+    await self.registration.showNotification(n.title || 'Kairos', { body: n.body || '', data, icon: 'icon-192.png', badge: 'badge-96.png', tag: n.tag, lang: n.lang || 'th', silent: !!n.silent });
+  })());
 });
