@@ -1,8 +1,8 @@
 // Kairos service worker — offline app shell + notification clicks.
-const VERSION = '202610171038';
+const VERSION = '202610172126';
 const SHELL = `kairos-shell-${VERSION}`;
 const RUNTIME = 'kairos-runtime';
-const ASSETS = ['./', 'index.html', `app.js?v=${VERSION}`, `app.css?v=${VERSION}`, `config.js?v=${VERSION}`, 'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'apple-touch-icon.png', 'badge-96.png', 'icon.svg', 'ProjectPM-PYRJS3TZ.js', 'chunk-3JPLASRB.js', 'chunk-ECSC66G4.js', 'chunk-GYL5CFKN.js', 'chunk-H6WCNT3F.js', 'chunk-JUZMOXVU.js', 'chunk-KN35QWMI.js', 'chunk-M652VLSZ.js', 'chunk-MO6CMK4P.js', 'chunk-N2QYHI6J.js', 'chunk-QJUMC5XX.js', 'chunk-SW4HATTS.js', 'chunk-WOT6VMZA.js', 'chunk-WTXIYJYG.js', 'clock-P4YDTZK7.js', 'cloud-KDRJCKAH.js', 'cloudctl-G6EPSERT.js', 'date-KBGTG4IC.js', 'egg-BAO55PKA.js', 'index.esm-B43YSHPE.js', 'index.esm-RTEO4NVN.js', 'index.esm-SKEIU7C5.js', 'state-R4M6RG2I.js', 'store-4HSFYKCX.js'];
+const ASSETS = ['./', 'index.html', `app.js?v=${VERSION}`, `app.css?v=${VERSION}`, `config.js?v=${VERSION}`, 'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'apple-touch-icon.png', 'badge-96.png', 'icon.svg', 'ProjectPM-34GLFRRL.js', 'chunk-2CBO4PN3.js', 'chunk-3JPLASRB.js', 'chunk-ALLUIT57.js', 'chunk-E236MJRG.js', 'chunk-ECSC66G4.js', 'chunk-JMTVCTPS.js', 'chunk-JUZMOXVU.js', 'chunk-KWJOH2DQ.js', 'chunk-MO6CMK4P.js', 'chunk-QJUMC5XX.js', 'chunk-WOT6VMZA.js', 'chunk-WTXIYJYG.js', 'chunk-Z4OVRGR7.js', 'clock-XSFUKXBK.js', 'cloud-KDRJCKAH.js', 'cloudctl-TJZQ44SO.js', 'date-BLYNNZMW.js', 'egg-BAO55PKA.js', 'index.esm-B43YSHPE.js', 'index.esm-RTEO4NVN.js', 'index.esm-SKEIU7C5.js', 'state-MUDCEHGF.js', 'store-6HXDWW6Y.js'];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(SHELL).then((c) => c.addAll(ASSETS)).catch(() => {}));
@@ -43,7 +43,7 @@ self.addEventListener('fetch', (e) => {
   }
   // app assets: cache-first (versioned), then network
   e.respondWith(caches.match(req, { ignoreSearch: false }).then((hit) => hit || fetch(req).then((res) => {
-    if (res.ok && url.pathname.match(/\.(png|svg|js|css|webmanifest)$/)) caches.open(RUNTIME).then((c) => c.put(req, res.clone()));
+    if (res.ok && url.pathname.match(/\.(png|webp|svg|js|css|webmanifest)$/)) caches.open(RUNTIME).then((c) => c.put(req, res.clone()));
     return res;
   }).catch(() => caches.match(req, { ignoreSearch: true }))));
 });
