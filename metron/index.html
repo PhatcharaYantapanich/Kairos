@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Bai+Jamjuree:wght@400;500;600;700&family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap" />
-  <link rel="stylesheet" href="app.css?v=202610251731" />
+  <link rel="stylesheet" href="app.css?v=202610251857" />
   <script>
     // apply theme before first paint (no white flash in dark mode)
     (function () {
@@ -28,70 +28,71 @@
         var dark = s.theme === 'dark' || ((!s.theme || s.theme === 'auto') && matchMedia('(prefers-color-scheme: dark)').matches);
         if (dark) { document.documentElement.classList.add('dark'); document.documentElement.dataset.theme = 'dark'; }
         if (s.accent) document.documentElement.dataset.accent = s.accent;
+        if (s.bg) { document.documentElement.style.background = s.bg; var mt = document.querySelector('meta[name="theme-color"]'); if (mt) mt.setAttribute('content', s.bg); }
       } catch (e) {}
     })();
-    window.KAIROS_VERSION = '202610251731';
+    window.KAIROS_VERSION = '202610251857';
     // v5.4.1: remember what went wrong while opening (shown if the logo stays too long)
     window.addEventListener('error', function (e) { if (!window.__bootErr) window.__bootErr = (e.message || 'error') + (e.filename ? ' @ ' + e.filename.split('/').pop() + ':' + e.lineno : ''); });
     window.addEventListener('unhandledrejection', function (e) { if (!window.__bootErr) window.__bootErr = String((e.reason && (e.reason.message || e.reason)) || 'rejection'); });
     window.KAIROS_START = 'metron'; // the same app, opened on its money face
   </script>
-  <link rel="modulepreload" href="App-RLC7CI7O.js" />
-  <link rel="modulepreload" href="MoneyLink-CTF5L3Z3.js" />
-  <link rel="modulepreload" href="ProjectPM-FYRHS7AN.js" />
-  <link rel="modulepreload" href="activity-RVVYQ3JB.js" />
-  <link rel="modulepreload" href="ai-IUINUD43.js" />
-  <link rel="modulepreload" href="ai-VY6DPT42.js" />
-  <link rel="modulepreload" href="apps-OWSD4J2D.js" />
-  <link rel="modulepreload" href="cattrans-NGUVUIWQ.js" />
-  <link rel="modulepreload" href="chunk-3GS2I3CW.js" />
+  <link rel="modulepreload" href="App-UX5G46VP.js" />
+  <link rel="modulepreload" href="MoneyLink-7FFJETEK.js" />
+  <link rel="modulepreload" href="ProjectPM-OG2FW6XI.js" />
+  <link rel="modulepreload" href="activity-HO6KW3IL.js" />
+  <link rel="modulepreload" href="ai-SL6F54EX.js" />
+  <link rel="modulepreload" href="ai-UGMR6VRP.js" />
+  <link rel="modulepreload" href="apps-UM3GBAU2.js" />
+  <link rel="modulepreload" href="cattrans-TOIIKSCP.js" />
+  <link rel="modulepreload" href="chunk-2PKOBDOM.js" />
   <link rel="modulepreload" href="chunk-3JPLASRB.js" />
-  <link rel="modulepreload" href="chunk-6VEZLYX6.js" />
-  <link rel="modulepreload" href="chunk-734MDGPD.js" />
-  <link rel="modulepreload" href="chunk-BRA2HA6S.js" />
-  <link rel="modulepreload" href="chunk-CWBMFOEE.js" />
+  <link rel="modulepreload" href="chunk-56QKHOID.js" />
+  <link rel="modulepreload" href="chunk-6EGNSURR.js" />
+  <link rel="modulepreload" href="chunk-72FED342.js" />
+  <link rel="modulepreload" href="chunk-7ITKMFUW.js" />
+  <link rel="modulepreload" href="chunk-BPRNLSUT.js" />
+  <link rel="modulepreload" href="chunk-E62JSPIR.js" />
   <link rel="modulepreload" href="chunk-ECSC66G4.js" />
-  <link rel="modulepreload" href="chunk-ICDZ52VD.js" />
-  <link rel="modulepreload" href="chunk-J6JAEXMN.js" />
-  <link rel="modulepreload" href="chunk-JLR2MUP7.js" />
+  <link rel="modulepreload" href="chunk-ESYF2ZBE.js" />
+  <link rel="modulepreload" href="chunk-GAXXD5VQ.js" />
+  <link rel="modulepreload" href="chunk-GIVHTOQ3.js" />
+  <link rel="modulepreload" href="chunk-JEE4KX3T.js" />
   <link rel="modulepreload" href="chunk-JUZMOXVU.js" />
-  <link rel="modulepreload" href="chunk-KXJ3I4VM.js" />
-  <link rel="modulepreload" href="chunk-LWITXU6N.js" />
   <link rel="modulepreload" href="chunk-M4RB7EMP.js" />
   <link rel="modulepreload" href="chunk-MO6CMK4P.js" />
-  <link rel="modulepreload" href="chunk-NDCK2UD5.js" />
-  <link rel="modulepreload" href="chunk-NQCIKBRM.js" />
-  <link rel="modulepreload" href="chunk-NWF354VH.js" />
-  <link rel="modulepreload" href="chunk-OFQSH4UK.js" />
-  <link rel="modulepreload" href="chunk-OUALPOUY.js" />
+  <link rel="modulepreload" href="chunk-MT6FZRAP.js" />
+  <link rel="modulepreload" href="chunk-QJS2GD4M.js" />
   <link rel="modulepreload" href="chunk-QJUMC5XX.js" />
-  <link rel="modulepreload" href="chunk-RTRVE43T.js" />
-  <link rel="modulepreload" href="chunk-RVBRL36E.js" />
-  <link rel="modulepreload" href="chunk-SL4Z64IU.js" />
-  <link rel="modulepreload" href="chunk-TLJGZ55F.js" />
+  <link rel="modulepreload" href="chunk-ST2Z6A7W.js" />
+  <link rel="modulepreload" href="chunk-V7O66YHG.js" />
+  <link rel="modulepreload" href="chunk-VDRH5BTW.js" />
   <link rel="modulepreload" href="chunk-WOT6VMZA.js" />
   <link rel="modulepreload" href="chunk-WTXIYJYG.js" />
-  <link rel="modulepreload" href="chunk-XAAZUSN2.js" />
-  <link rel="modulepreload" href="chunk-YQEH4ZIN.js" />
-  <link rel="modulepreload" href="chunk-ZY6J7PBX.js" />
-  <link rel="modulepreload" href="clock-SZPUC5FS.js" />
+  <link rel="modulepreload" href="chunk-WWWCLK7Z.js" />
+  <link rel="modulepreload" href="chunk-XEAECDRH.js" />
+  <link rel="modulepreload" href="chunk-XTTDJUQF.js" />
+  <link rel="modulepreload" href="chunk-XUCULPU7.js" />
+  <link rel="modulepreload" href="chunk-YQSF7ZV2.js" />
+  <link rel="modulepreload" href="chunk-YZ4D4I4Y.js" />
+  <link rel="modulepreload" href="clock-57MHCQV7.js" />
   <link rel="modulepreload" href="cloud-BCTOXFO5.js" />
-  <link rel="modulepreload" href="cloudctl-ZTCKRFTW.js" />
-  <link rel="modulepreload" href="date-2NJGC2ZW.js" />
+  <link rel="modulepreload" href="cloudctl-YOQVTBFC.js" />
+  <link rel="modulepreload" href="date-4EEJAMH3.js" />
   <link rel="modulepreload" href="egg-BAO55PKA.js" />
   <link rel="modulepreload" href="index.esm-B43YSHPE.js" />
   <link rel="modulepreload" href="index.esm-RTEO4NVN.js" />
   <link rel="modulepreload" href="index.esm-SKEIU7C5.js" />
-  <link rel="modulepreload" href="money-QBMZQJ23.js" />
-  <link rel="modulepreload" href="naming-UUROTSYV.js" />
-  <link rel="modulepreload" href="parse-NTJ5OZXG.js" />
-  <link rel="modulepreload" href="review-7OTV2PPQ.js" />
-  <link rel="modulepreload" href="server-JDZB3P5S.js" />
-  <link rel="modulepreload" href="state-5PTAL7JG.js" />
-  <link rel="modulepreload" href="state-UKUKPRLI.js" />
-  <link rel="modulepreload" href="stickers-E42HBDXB.js" />
-  <link rel="modulepreload" href="store-VY2QVF7H.js" />
-  <script src="config.js?v=202610251731"></script>
+  <link rel="modulepreload" href="money-IDLV5VDZ.js" />
+  <link rel="modulepreload" href="naming-CC7AC7XB.js" />
+  <link rel="modulepreload" href="parse-2JRD3CIL.js" />
+  <link rel="modulepreload" href="review-BUWMY56V.js" />
+  <link rel="modulepreload" href="server-XZMDZIMR.js" />
+  <link rel="modulepreload" href="state-OCCBRCST.js" />
+  <link rel="modulepreload" href="state-TYL5G5S3.js" />
+  <link rel="modulepreload" href="stickers-357P44IM.js" />
+  <link rel="modulepreload" href="store-FLW344NS.js" />
+  <script src="config.js?v=202610251857"></script>
   <style>
     /* splash: painted before any script runs */
     /* v5.0: no spinner — the logo slowly breathes (fades out and back) while the app loads,
@@ -155,6 +156,6 @@
         '<button onclick="location.reload(true)" style="font:inherit;padding:8px 16px;border-radius:10px;border:0;background:#111B2C;color:#fff">ลองโหลดใหม่</button></div>';
     }, 8000);
   </script>
-  <script type="module" src="app.js?v=202610251731"></script>
+  <script type="module" src="app.js?v=202610251857"></script>
 </body>
 </html>
