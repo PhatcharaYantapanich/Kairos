@@ -1,8 +1,8 @@
 // Kairos service worker — offline app shell + notification clicks.
-const VERSION = '202610232027';
+const VERSION = '202610251050';
 const SHELL = `kairos-shell-${VERSION}`;
 const RUNTIME = 'kairos-runtime';
-const ASSETS = ['./', 'index.html', `app.js?v=${VERSION}`, `app.css?v=${VERSION}`, `config.js?v=${VERSION}`, 'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'apple-touch-icon.png', 'badge-96.png', 'icon.svg', 'ProjectPM-75JFVPG5.js', 'activity-PUJG4MZU.js', 'ai-4M2FDBGX.js', 'cattrans-BB2GREXX.js', 'chunk-3JPLASRB.js', 'chunk-AYDLSBP5.js', 'chunk-AZMO5DCA.js', 'chunk-C5PPY4UT.js', 'chunk-CWYK3MSP.js', 'chunk-ECSC66G4.js', 'chunk-GT2B53IN.js', 'chunk-IMPTXINR.js', 'chunk-JUZMOXVU.js', 'chunk-LQNTOSZF.js', 'chunk-MO6CMK4P.js', 'chunk-N2Y7IVDA.js', 'chunk-P6576RAT.js', 'chunk-PLNIT5YU.js', 'chunk-QJUMC5XX.js', 'chunk-RSOLSL44.js', 'chunk-VMVUYWSC.js', 'chunk-VPNNKBGF.js', 'chunk-WOT6VMZA.js', 'chunk-WTXIYJYG.js', 'chunk-XEPPMRGN.js', 'clock-ZNZDNN4I.js', 'cloud-OA6S5O5F.js', 'cloudctl-UCRSMGM7.js', 'date-V3IN36ZG.js', 'egg-BAO55PKA.js', 'index.esm-B43YSHPE.js', 'index.esm-RTEO4NVN.js', 'index.esm-SKEIU7C5.js', 'naming-GA7W5NFK.js', 'review-GLYVBZ3B.js', 'server-4ADRPIBP.js', 'state-444OABRE.js', 'stickers-C36G34MA.js', 'store-XJVFHEHH.js'];
+const ASSETS = ['./', 'index.html', `app.js?v=${VERSION}`, `app.css?v=${VERSION}`, `config.js?v=${VERSION}`, 'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'apple-touch-icon.png', 'badge-96.png', 'metron/', 'metron/index.html', 'metron/manifest.webmanifest', 'metron/icon-192.png', 'metron/apple-touch-icon.png', 'metron/icon.svg', 'icon.svg', 'App-6FTP7H26.js', 'ProjectPM-Y5BKOFAM.js', 'activity-C2NJKHSW.js', 'ai-7JWCONNK.js', 'ai-W6J5BBAZ.js', 'apps-TSRJKC3I.js', 'cattrans-LMPN5M2P.js', 'chunk-23ISH2CA.js', 'chunk-3CYJ5F3U.js', 'chunk-3JPLASRB.js', 'chunk-4CEUP2HZ.js', 'chunk-4HPWNA37.js', 'chunk-4MRJUK53.js', 'chunk-65NEEQLD.js', 'chunk-AFIZWGD5.js', 'chunk-ALLJSH5U.js', 'chunk-AV562G4J.js', 'chunk-DFHIVS2O.js', 'chunk-ECSC66G4.js', 'chunk-H2FFEVD5.js', 'chunk-JDY626F7.js', 'chunk-JUZMOXVU.js', 'chunk-KFNBKGEZ.js', 'chunk-KGRJZ32P.js', 'chunk-MO6CMK4P.js', 'chunk-N2Y7IVDA.js', 'chunk-QJUMC5XX.js', 'chunk-RLQZRPKO.js', 'chunk-RVZMKRSF.js', 'chunk-SLVPKK52.js', 'chunk-SZKOK5CX.js', 'chunk-WOT6VMZA.js', 'chunk-WTXIYJYG.js', 'chunk-WWFLPX6H.js', 'chunk-XVVAZJ72.js', 'clock-FQ3P33HS.js', 'cloud-BCTOXFO5.js', 'cloudctl-I4HZYJQR.js', 'date-TGUALRQM.js', 'egg-BAO55PKA.js', 'index.esm-B43YSHPE.js', 'index.esm-RTEO4NVN.js', 'index.esm-SKEIU7C5.js', 'money-2JJDP5X5.js', 'naming-DSGDTYE5.js', 'parse-Z5D6GSRJ.js', 'review-BTBGN3S6.js', 'server-CCBPFY7X.js', 'state-MG6SWMEX.js', 'state-TFC4WIWB.js', 'stickers-J7ED3A3S.js', 'store-NC7PCWM2.js'];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(SHELL).then((c) => c.addAll(ASSETS)).catch(() => {}));
@@ -36,9 +36,11 @@ self.addEventListener('fetch', (e) => {
   }
   if (url.origin !== self.location.origin) return;
   // navigations: network-first, fall back to cached shell (offline)
+  // v5.4: ./metron/ is the same app opened on its money face (its own page + manifest)
   if (req.mode === 'navigate') {
-    e.respondWith(fetch(req).then((res) => { caches.open(SHELL).then((c) => c.put('index.html', res.clone())); return res; })
-      .catch(async () => (await caches.match('index.html')) || (await caches.match('./'))));
+    const page = /\/metron\/?(index\.html)?$/.test(url.pathname) ? 'metron/index.html' : 'index.html';
+    e.respondWith(fetch(req).then((res) => { if (res.ok) caches.open(SHELL).then((c) => c.put(page, res.clone())); return res; })
+      .catch(async () => (await caches.match(page)) || (await caches.match(page === 'index.html' ? './' : 'metron/'))));
     return;
   }
   // app assets: cache-first (versioned), then network
