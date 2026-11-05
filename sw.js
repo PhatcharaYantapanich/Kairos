@@ -35,6 +35,8 @@ self.addEventListener('fetch', (e) => {
     return;
   }
   if (url.origin !== self.location.origin) return;
+  // the v7 design preview at ./v7/ is left alone (not cached, never replaces the app's offline page)
+  if (url.pathname.includes('/v7/')) return;
   // navigations: network-first, fall back to cached shell (offline)
   // v5.4: ./metron/ is the same app opened on its money face (its own page + manifest)
   if (req.mode === 'navigate') {
