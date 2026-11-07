@@ -1,8 +1,8 @@
 // Kairos service worker — offline app shell + notification clicks.
-const VERSION = '202611010439';
+const VERSION = '202611071402';
 const SHELL = `kairos-shell-${VERSION}`;
 const RUNTIME = 'kairos-runtime';
-const ASSETS = ['./', 'index.html', `app.js?v=${VERSION}`, `app.css?v=${VERSION}`, `config.js?v=${VERSION}`, 'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'apple-touch-icon.png', 'badge-96.png', 'metron/', 'metron/index.html', 'metron/manifest.webmanifest', 'metron/icon-192.png', 'metron/apple-touch-icon.png', 'metron/icon.svg', 'icon.svg', 'App-JVEH2QAB.js', 'MoneyLink-4M52KIUH.js', 'ProjectPM-DZ5GDYZS.js', 'activity-RP74W2G7.js', 'ai-Q3STMUMC.js', 'ai-Y34ZXXN7.js', 'apps-6QQ3IYCG.js', 'cattrans-5NRDU7U7.js', 'chunk-25X4SNVF.js', 'chunk-3IOHBBBU.js', 'chunk-3JPLASRB.js', 'chunk-4EVNIGRI.js', 'chunk-4TWN66YE.js', 'chunk-CAJKZY6T.js', 'chunk-ECSC66G4.js', 'chunk-EEHWE7ZE.js', 'chunk-EPNUDA3L.js', 'chunk-GBB4T5VH.js', 'chunk-GF75OO2U.js', 'chunk-IB2GK3W7.js', 'chunk-JUZMOXVU.js', 'chunk-JVR537IX.js', 'chunk-K7NABUZI.js', 'chunk-KDHXZKSN.js', 'chunk-KJRTNURU.js', 'chunk-KUXO5B24.js', 'chunk-M4RB7EMP.js', 'chunk-MO6CMK4P.js', 'chunk-PD4JBLWX.js', 'chunk-Q77BG7BA.js', 'chunk-QJUMC5XX.js', 'chunk-QYUDTP3N.js', 'chunk-UOG7UOPY.js', 'chunk-W36TXC5B.js', 'chunk-WOT6VMZA.js', 'chunk-WQICAVKF.js', 'chunk-WTXIYJYG.js', 'chunk-YWNZ5OC7.js', 'clock-VANC6RNN.js', 'cloud-BCTOXFO5.js', 'cloudctl-R443MFK4.js', 'date-LYFVD5QW.js', 'egg-BAO55PKA.js', 'index.esm-B43YSHPE.js', 'index.esm-RTEO4NVN.js', 'index.esm-SKEIU7C5.js', 'money-52WJYRCX.js', 'naming-QB35ITWE.js', 'parse-LUATSFMJ.js', 'review-MGXVNZ5I.js', 'server-BGOXOWGQ.js', 'state-23ZFRMBW.js', 'state-HXO2AGWJ.js', 'stickers-HIGQ2725.js', 'store-JICTNMRE.js'];
+const ASSETS = ['./', 'index.html', `app.js?v=${VERSION}`, `app.css?v=${VERSION}`, `config.js?v=${VERSION}`, 'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'apple-touch-icon.png', 'badge-96.png', 'metron/', 'metron/index.html', 'metron/manifest.webmanifest', 'metron/icon-192.png', 'metron/apple-touch-icon.png', 'metron/icon.svg', 'icon.svg', 'App-KGREG6HF.js', 'MoneyLink-RPFCH44D.js', 'ProjectPM-I3A7WD45.js', 'activity-7RKF4TFN.js', 'ai-NY7RGIAH.js', 'ai-TWOY4HGC.js', 'apps-QXJ3T2SH.js', 'cattrans-JFP767XP.js', 'chunk-2A3GGDCX.js', 'chunk-2ZXNAXFI.js', 'chunk-36YXT5V5.js', 'chunk-3JPLASRB.js', 'chunk-3TXVL7ZN.js', 'chunk-4X32PRST.js', 'chunk-5GYFJP66.js', 'chunk-6X3EQ6F2.js', 'chunk-BMX66LBU.js', 'chunk-CUBSTIUC.js', 'chunk-D32R5QGA.js', 'chunk-DF2H25AF.js', 'chunk-ECSC66G4.js', 'chunk-IOTP3GOV.js', 'chunk-JUZMOXVU.js', 'chunk-K6RADAAW.js', 'chunk-KAI4AIRI.js', 'chunk-KYAY3LKO.js', 'chunk-L7E4YZ6R.js', 'chunk-LEQAQU6J.js', 'chunk-M4RB7EMP.js', 'chunk-MAWZIFBY.js', 'chunk-MO6CMK4P.js', 'chunk-N6XCC67B.js', 'chunk-QJUMC5XX.js', 'chunk-VBB3EF33.js', 'chunk-W6ZTGJ6N.js', 'chunk-WOT6VMZA.js', 'chunk-WTXIYJYG.js', 'chunk-Y7BIGLLJ.js', 'clock-OQ5IVEI7.js', 'cloud-BCTOXFO5.js', 'cloudctl-PQOLV235.js', 'date-GO7IBA6A.js', 'egg-BAO55PKA.js', 'index.esm-B43YSHPE.js', 'index.esm-RTEO4NVN.js', 'index.esm-SKEIU7C5.js', 'money-YOIYO3XU.js', 'naming-A4JDYP6I.js', 'parse-Y2QEJ34W.js', 'review-AIZMGAM7.js', 'server-XB6RSBHI.js', 'state-R2OABF3J.js', 'state-XRLSBOZK.js', 'stickers-KPS34JY3.js', 'store-EK3WCD3O.js'];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(SHELL).then((c) => c.addAll(ASSETS)).catch(() => {}));
@@ -35,8 +35,6 @@ self.addEventListener('fetch', (e) => {
     return;
   }
   if (url.origin !== self.location.origin) return;
-  // the v7 design preview at ./v7/ is left alone (not cached, never replaces the app's offline page)
-  if (url.pathname.includes('/v7/')) return;
   // navigations: network-first, fall back to cached shell (offline)
   // v5.4: ./metron/ is the same app opened on its money face (its own page + manifest)
   if (req.mode === 'navigate') {
